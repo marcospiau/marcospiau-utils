@@ -33,5 +33,10 @@ set showmatch
 " enable all Python syntax highlighting features
 let python_highlight_all = 1
 
+" Improves indentation for python
+syntax on
+filetype plugin indent on
+
+
 "Remove all trailing whitespace by pressing F5
 nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
