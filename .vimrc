@@ -37,6 +37,9 @@ let python_highlight_all = 1
 syntax on
 filetype plugin indent on
 
-
 "Remove all trailing whitespace by pressing F5
 nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
+
+" jk or jk to enter/exit command mode
+inoremap jk <esc>
+inoremap kj <esc>
