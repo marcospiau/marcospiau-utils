@@ -1,3 +1,10 @@
+execute pathogen#infect()
+" Options for pydocstring plugin
+let g:pydocstring_doq_path = '/home/marcospiau/miniconda3/bin/doq'
+let g:pydocstring_formatter = 'google'
+map <Leader>d :Pydocstring <Enter>
+
+
 set number
 set colorcolumn=80
 set nocompatible
@@ -43,3 +50,9 @@ nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 " jk or jk to enter/exit command mode
 inoremap jk <esc>
 inoremap kj <esc>
+
+" autocomplete
+set omnifunc=syntaxcomplete#Complete
+
+" Relative numbers
+set relativenumber
