@@ -1,3 +1,6 @@
+# copy .vimrc to $HOME
+cp .vimrc ~/.vimrc
+
 # Install pathogen
 mkdir -p ~/.vim/autoload ~/.vim/bundle && \
 curl -LSso ~/.vim/autoload/pathogen.vim \
