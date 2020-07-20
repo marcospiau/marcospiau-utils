@@ -1,0 +1,5 @@
+christian-kohler.path-intellisense
+ms-python.python
+njpwerner.autodocstring
+VisualStudioExptTeam.vscodeintellicode
+vscodevim.vim
