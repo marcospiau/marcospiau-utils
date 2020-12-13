@@ -1,6 +1,6 @@
 execute pathogen#infect()
 " Options for pydocstring plugin
-let g:pydocstring_doq_path = '/home/marcospiau/miniconda3/bin/doq'
+let g:pydocstring_doq_path = '/opt/conda/bin/doq'
 let g:pydocstring_formatter = 'google'
 map <Leader>d :Pydocstring <Enter>
 
@@ -32,7 +32,7 @@ set expandtab
 set shiftwidth=4
 
 " show a visual line under the cursor's current line
-set cursorline
+" set cursorline
 
 " show the matching part of the pair for [] {} and ()
 set showmatch
@@ -55,4 +55,4 @@ inoremap kj <esc>
 set omnifunc=syntaxcomplete#Complete
 
 " Relative numbers
-set relativenumber
+" set relativenumber
