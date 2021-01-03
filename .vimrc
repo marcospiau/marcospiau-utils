@@ -16,6 +16,9 @@ set ignorecase
 set smartcase
 set incsearch
 
+" monokai color scheme
+colorscheme monokai
+
 " enable syntax highlighting
 syntax enable
 
