@@ -1,0 +1,11 @@
+# enable mousetrack
+mousetrack on
+# Enable the hardstatus line
+hardstatus on
+
+# Set the hardstatus string
+hardstatus alwayslastline
+hardstatus string "%{= wk}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}%H%{w} %Y-%m-%d %c"
+
+# Set the caption always at the bottom of the window
+caption always "%{= wk}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}%H%{w} %Y-%m-%d %c"
