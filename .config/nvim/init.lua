@@ -17,6 +17,8 @@ vim.opt.smartindent = true
 vim.opt.ignorecase = true
 -- Override ignorecase if search term contains uppercase
 vim.opt.smartcase = true
+vim.g.mapleader = " "  -- This sets the leader key to space
+vim.o.mouse = 'a' -- mouse mode
 
 -- Plugin Management with lazy.nvim
 -- Ensure lazy.nvim is installed
@@ -71,13 +73,15 @@ require('lspconfig').ruff_lsp.setup{
 }
 
 -- Configure ruff-lsp for Python with an explicit path
--- nvim_lsp.ruff_lsp.setup{
---   cmd = {""}, -- Replace with the actual path from `which ruff-lsp`
--- }
+nvim_lsp.ruff_lsp.setup{
+  cmd = {"..."}, -- Replace with the actual path from `which ruff-lsp`
+}
 
 -- Keymaps (optional)
 -- Map <Leader>b to format code with Black (removed, since ruff-lsp handles formatting)
 -- vim.api.nvim_set_keymap('n', '<Leader>b', ':Black<CR>', { noremap = true, silent = true })
 -- Map <C-p> to open Telescope fuzzy finder
-vim.api.nvim_set_keymap('n', '<C-p>', ':Telescope find_files<CR>', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<C-p>', ':Telescope find_files<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-p>', ':lua require("telescope.builtin").find_files(require("telescope.themes").get_dropdown({ hidden = true, no_ignore = true }))<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>fg', "<cmd>lua require('telescope.builtin').live_grep({ vimgrep_arguments = { 'rg', '--color=never', '--no-heading', '--with-filename', '--line-number', '--column', '--smart-case', '--hidden', '--glob', '!.git' } })<cr>", { noremap = true, silent = true })
 
