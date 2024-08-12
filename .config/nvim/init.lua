@@ -1,27 +1,18 @@
 -- ~/.config/nvim/init.lua
 
 -- Basic Settings
--- Enable line numbers
 vim.opt.number = true
--- Enable relative line numbers
 -- vim.opt.relativenumber = true
--- Number of spaces to use for a tab
 vim.opt.tabstop = 4
--- Number of spaces to use for each step of (auto)indent
 vim.opt.shiftwidth = 4
--- Convert tabs to spaces
 vim.opt.expandtab = true
--- Use smart indentation
 vim.opt.smartindent = true
--- Ignore case when searching
 vim.opt.ignorecase = true
--- Override ignorecase if search term contains uppercase
 vim.opt.smartcase = true
-vim.g.mapleader = " "  -- This sets the leader key to space
+-- vim.g.mapleader = " "  -- This sets the leader key to space
 vim.o.mouse = 'a' -- mouse mode
 
 -- Plugin Management with lazy.nvim
--- Ensure lazy.nvim is installed
 local lazypath = vim.fn.stdpath('data')..'/site/pack/lazy/start/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -29,6 +20,7 @@ if not vim.loop.fs_stat(lazypath) then
     'https://github.com/folke/lazy.nvim.git', lazypath
   })
 end
+
 -- Initialize lazy.nvim plugin manager
 require('lazy').setup({
   -- Essential Plugins
@@ -47,41 +39,66 @@ require('lazy').setup({
 
   -- GitHub Copilot
   'github/copilot.vim', -- GitHub Copilot integration
+
+  -- New Plugins
+  {
+    'smoka7/hop.nvim',
+    version = "*",
+    opts = {
+      keys = 'etovxqpdygfblzhckisuran'
+    }
+  },
+  {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    init = function()
+      vim.o.timeout = true
+      vim.o.timeoutlen = 300
+    end,
+    opts = {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+    }
+  },
+  {
+    'numToStr/Comment.nvim',
+    opts = {
+      -- No need to add any options here, defaults work well
+    },
+    lazy = false,
+  },
 })
 
 -- Treesitter Configuration
--- Configure Treesitter for syntax highlighting and code navigation
 require'nvim-treesitter.configs'.setup {
-  -- Ensure maintained parsers are installed
   ensure_installed = { "python", "lua", "javascript", "html", "css" },
   highlight = {
-    enable = true, -- Enable syntax highlighting
+    enable = true,
   },
 }
 
 -- LSP Configuration
--- Setup LSP using ruff-lsp for Python
 local nvim_lsp = require('lspconfig')
 
--- Configure ruff-lsp for Python
 nvim_lsp.ruff_lsp.setup{}
 
--- Set up nvim-cmp for completion with LSP capabilities
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 require('lspconfig').ruff_lsp.setup{
     capabilities = capabilities
 }
 
--- Configure ruff-lsp for Python with an explicit path
 nvim_lsp.ruff_lsp.setup{
   cmd = {"..."}, -- Replace with the actual path from `which ruff-lsp`
 }
 
--- Keymaps (optional)
--- Map <Leader>b to format code with Black (removed, since ruff-lsp handles formatting)
--- vim.api.nvim_set_keymap('n', '<Leader>b', ':Black<CR>', { noremap = true, silent = true })
--- Map <C-p> to open Telescope fuzzy finder
--- vim.api.nvim_set_keymap('n', '<C-p>', ':Telescope find_files<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-p>', ':lua require("telescope.builtin").find_files(require("telescope.themes").get_dropdown({ hidden = true, no_ignore = true }))<CR>', { noremap = true, silent = true })
+-- Keymaps
+vim.api.nvim_set_keymap('n', '<C-p>', ':lua require("telescope.builtin").find_files({ hidden = true, no_ignore = true })<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>fg', "<cmd>lua require('telescope.builtin').live_grep({ vimgrep_arguments = { 'rg', '--color=never', '--no-heading', '--with-filename', '--line-number', '--column', '--smart-case', '--hidden', '--glob', '!.git' } })<cr>", { noremap = true, silent = true })
 
+
+-- Setup for new plugins
+require('hop').setup()
+require('which-key').setup()
+
+-- Example keybinding for hop.nvim
+vim.api.nvim_set_keymap('n', '<leader>w', "<cmd>HopWord<cr>", {noremap = true, silent = true})
